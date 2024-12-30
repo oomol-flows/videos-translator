@@ -1,0 +1,111 @@
+{
+  "nodes": {
+    "read_media_to_ffmpeg#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 248,
+          "y": 268
+        }
+      }
+    },
+    "audio_video_separation#1": {
+      "contentWidth": 402.41772120102206,
+      "rfNode": {
+        "position": {
+          "x": 671,
+          "y": 268
+        }
+      }
+    },
+    "save_and_preivew#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 1148.615327216623,
+          "y": 83.54150500768986
+        }
+      }
+    },
+    "whisper-model#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 1148.615327216623,
+          "y": 620.6719894523122
+        }
+      }
+    },
+    "whisper#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 1575.0519654572759,
+          "y": 407.62153366619145
+        }
+      }
+    },
+    "translater#2": {
+      "contentWidth": 508.0272091228371,
+      "rfNode": {
+        "position": {
+          "x": 2573.5738410577155,
+          "y": 73.13104547781708
+        }
+      }
+    },
+    "+python#2": {
+      "contentWidth": 479.50622646865156,
+      "rfNode": {
+        "position": {
+          "x": 2032.8780235081963,
+          "y": 164.1310454778171
+        }
+      },
+      "sections": {
+        "inputs": {
+          "collapsed": {
+            "segments": {
+              "[]": true
+            }
+          }
+        }
+      }
+    },
+    "+python#1": {
+      "contentWidth": 557.4776898748083,
+      "rfNode": {
+        "position": {
+          "x": 3203.920820179997,
+          "y": 456.48512844285943
+        }
+      }
+    },
+    "whisper_segments_to_srt#2": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 3833.968377778934,
+          "y": 456.48512844285943
+        }
+      }
+    },
+    "encode-string#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 4347.656184447688,
+          "y": 456.48512844285943
+        }
+      }
+    },
+    "write-temp-file#1": {
+      "rfNode": {
+        "position": {
+          "x": 4875.600643606729,
+          "y": 456.48512844285943
+        }
+      }
+    }
+  }
+}

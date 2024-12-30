@@ -1,0 +1,280 @@
+nodes:
+  - task: ffmpeg-mac::read_media_to_ffmpeg
+    node_id: read_media_to_ffmpeg#1
+    inputs_from:
+      - handle: video_source
+        value: /oomol-driver/oomol-storage/ask.mp4
+    title: Read media file
+  - task: ffmpeg-mac::audio_video_separation
+    node_id: audio_video_separation#1
+    inputs_from:
+      - handle: ffmpeg_source
+        from_node:
+          - node_id: read_media_to_ffmpeg#1
+            output_handle: ffmpeg_source
+    title: Split audio
+  - task: ffmpeg-mac::save_and_preivew
+    node_id: save_and_preivew#1
+    inputs_from:
+      - handle: ffmpeg_source
+        value: ""
+        from_node:
+          - node_id: audio_video_separation#1
+            output_handle: ffmpeg_only_audio
+      - handle: file_name
+        value: audio
+      - handle: formate
+        value: mp3
+      - handle: save_address
+        value:
+    title: Save and prevew
+  - task: whisper::whisper-model
+    title: "Whisper model #1"
+    node_id: whisper-model#1
+    inputs_from:
+      - handle: model
+        value: small
+      - handle: device
+        value: cuda
+      - handle: dir_path
+        value:
+  - task: whisper::whisper
+    title: "Whisper #1"
+    node_id: whisper#1
+    inputs_from:
+      - handle: audio_file
+        from_node:
+          - node_id: save_and_preivew#1
+            output_handle: file_adress
+      - handle: model
+        from_node:
+          - node_id: whisper-model#1
+            output_handle: model
+      - handle: word_timestamps
+        value: false
+      - handle: prompt
+        value: ""
+  - task: self::translater
+    title: "Translate texts list #2"
+    node_id: translater#2
+    inputs_from:
+      - handle: texts
+        value:
+          []
+        from_node:
+          - node_id: +python#2
+            output_handle: texts
+      - handle: llm_api
+        value: openai
+      - handle: key
+        value: ""
+      - handle: url
+        value:
+      - handle: model
+        value: ""
+      - handle: temperature
+        value: 0
+      - handle: timeout
+        value:
+      - handle: source_lan
+        value:
+      - handle: target_lan
+      - handle: group_max_tokens
+        value: 4000
+  - task:
+      ui:
+        default_width: 450
+      inputs_def:
+        - handle: segments
+          description: Input
+          json_schema:
+            type: array
+            items:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+      outputs_def:
+        - handle: texts
+          description: Output
+          json_schema:
+            type: array
+            items:
+              type: string
+      executor:
+        name: python
+        options:
+          entry: scriptlets/+python#2.py
+    title: "Convert to texts list"
+    icon: ":logos:python:"
+    node_id: +python#2
+    inputs_from:
+      - handle: segments
+        value:
+          []
+        from_node:
+          - node_id: whisper#1
+            output_handle: segments
+  - task:
+      ui:
+        default_width: 450
+      inputs_def:
+        - handle: texts
+          json_schema:
+            type: array
+            items:
+              type: string
+          value: ""
+        - handle: segments
+          description: Input
+          json_schema:
+            type: array
+            items:
+              type: object
+              required:
+                - text
+                - avg_logprob
+                - compression_ratio
+                - id
+                - no_speech_prob
+                - seek
+                - start
+                - end
+                - temperature
+                - tokens
+              properties:
+                text:
+                  type: string
+                avg_logprob:
+                  type: number
+                compression_ratio:
+                  type: number
+                id:
+                  type: integer
+                no_speech_prob:
+                  type: number
+                seek:
+                  type: number
+                start:
+                  type: number
+                end:
+                  type: number
+                temperature:
+                  type: number
+                tokens:
+                  type: array
+                  items:
+                    type: number
+                words:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      start:
+                        type: number
+                      end:
+                        type: number
+                      word:
+                        type: string
+                      probability:
+                        type: number
+      outputs_def:
+        - handle: segments
+          description: Output
+          json_schema:
+            type: array
+            items:
+              type: object
+              required:
+                - text
+                - avg_logprob
+                - compression_ratio
+                - id
+                - no_speech_prob
+                - seek
+                - start
+                - end
+                - temperature
+                - tokens
+              properties:
+                text:
+                  type: string
+                avg_logprob:
+                  type: number
+                compression_ratio:
+                  type: number
+                id:
+                  type: integer
+                no_speech_prob:
+                  type: number
+                seek:
+                  type: number
+                start:
+                  type: number
+                end:
+                  type: number
+                temperature:
+                  type: number
+                tokens:
+                  type: array
+                  items:
+                    type: number
+                words:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      start:
+                        type: number
+                      end:
+                        type: number
+                      word:
+                        type: string
+                      probability:
+                        type: number
+      executor:
+        name: python
+        options:
+          entry: scriptlets/+python#1.py
+    title: Replace texts of segments
+    icon: ":logos:python:"
+    node_id: +python#1
+    inputs_from:
+      - handle: segments
+        from_node:
+          - node_id: whisper#1
+            output_handle: segments
+      - handle: texts
+        value:
+          []
+        from_node:
+          - node_id: translater#2
+            output_handle: texts
+  - task: whisper::whisper_segments_to_srt
+    title: "Whisper segments to SRT #2"
+    node_id: whisper_segments_to_srt#2
+    inputs_from:
+      - handle: segments
+        from_node:
+          - node_id: +python#1
+            output_handle: segments
+  - task: oomol-transform::encode-string
+    title: "Encode string #1"
+    node_id: encode-string#1
+    inputs_from:
+      - handle: string
+        from_node:
+          - node_id: whisper_segments_to_srt#2
+            output_handle: srt
+      - handle: encoding
+        value: utf8
+  - task: oomol-file::write-temp-file
+    title: "Write temp file #1"
+    node_id: write-temp-file#1
+    inputs_from:
+      - handle: binary
+        from_node:
+          - node_id: encode-string#1
+            output_handle: binary
