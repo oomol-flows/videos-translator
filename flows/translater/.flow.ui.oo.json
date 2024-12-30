@@ -1,0 +1,49 @@
+{
+  "nodes": {
+    "read_media_to_ffmpeg#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 248,
+          "y": 268
+        }
+      }
+    },
+    "audio_video_separation#1": {
+      "contentWidth": 402.41772120102206,
+      "rfNode": {
+        "position": {
+          "x": 671,
+          "y": 268
+        }
+      }
+    },
+    "save_and_preivew#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 1148.615327216623,
+          "y": 83.54150500768986
+        }
+      }
+    },
+    "whisper-model#1": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 1148.615327216623,
+          "y": 617.5118860942031
+        }
+      }
+    },
+    "whisper#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 1547.4202154795614,
+          "y": 318.585894849112
+        }
+      }
+    }
+  }
+}

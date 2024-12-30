@@ -1,0 +1,56 @@
+nodes:
+  - task: ffmpeg-mac::read_media_to_ffmpeg
+    node_id: read_media_to_ffmpeg#1
+    inputs_from:
+      - handle: video_source
+        value: /oomol-driver/oomol-storage/ask.mp4
+    title: Read media file
+  - task: ffmpeg-mac::audio_video_separation
+    node_id: audio_video_separation#1
+    inputs_from:
+      - handle: ffmpeg_source
+        from_node:
+          - node_id: read_media_to_ffmpeg#1
+            output_handle: ffmpeg_source
+    title: Split audio
+  - task: ffmpeg-mac::save_and_preivew
+    node_id: save_and_preivew#1
+    inputs_from:
+      - handle: ffmpeg_source
+        value: ""
+        from_node:
+          - node_id: audio_video_separation#1
+            output_handle: ffmpeg_only_audio
+      - handle: file_name
+        value: audio
+      - handle: formate
+        value: mp3
+      - handle: save_address
+        value:
+    title: Save and prevew
+  - task: whisper::whisper-model
+    title: "Whisper model #1"
+    node_id: whisper-model#1
+    inputs_from:
+      - handle: model
+        value: small
+      - handle: device
+        value: cuda
+      - handle: dir_path
+        value:
+  - task: whisper::whisper
+    title: "Whisper #1"
+    node_id: whisper#1
+    inputs_from:
+      - handle: audio_file
+        from_node:
+          - node_id: save_and_preivew#1
+            output_handle: file_adress
+      - handle: model
+        from_node:
+          - node_id: whisper-model#1
+            output_handle: model
+      - handle: word_timestamps
+        value: false
+      - handle: prompt
+        value: ""

@@ -5,3 +5,6 @@ scripts:
   bootstrap: |
     pnpm install && pip install -r requirements.txt
 icon: ./icon.png
+dependencies:
+  ffmpeg-mac: 0.0.4
+  whisper: 0.0.1
