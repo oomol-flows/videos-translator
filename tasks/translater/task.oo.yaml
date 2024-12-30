@@ -60,8 +60,7 @@ inputs_def:
           - Français
           - Русский
           - Deutsch
-    value:
-    nullable: true
+    nullable: false
   - handle: target_lan
     json_schema:
       enum:
