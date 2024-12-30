@@ -28,7 +28,7 @@
       }
     },
     "whisper-model#1": {
-      "contentWidth": 352.24258555570896,
+      "contentWidth": 350,
       "rfNode": {
         "position": {
           "x": 1148.615327216623,
@@ -37,11 +37,38 @@
       }
     },
     "whisper#1": {
-      "contentWidth": 450,
+      "contentWidth": 350,
       "rfNode": {
         "position": {
           "x": 1575.0519654572759,
           "y": 407.62153366619145
+        }
+      }
+    },
+    "translater#2": {
+      "contentWidth": 508.0272091228371,
+      "rfNode": {
+        "position": {
+          "x": 2531.194955676383,
+          "y": 407.62153366619145
+        }
+      }
+    },
+    "+python#2": {
+      "contentWidth": 479.50622646865156,
+      "rfNode": {
+        "position": {
+          "x": 1987.4720748853401,
+          "y": 407.62153366619145
+        }
+      },
+      "sections": {
+        "inputs": {
+          "collapsed": {
+            "segments": {
+              "[]": true
+            }
+          }
         }
       }
     }

@@ -1,0 +1,101 @@
+inputs_def:
+  - handle: texts
+    description: Input
+    json_schema:
+      type: array
+      items:
+        type: string
+    value:
+      []
+  - handle: llm_api
+    json_schema:
+      enum:
+        - openai
+        - claude
+        - gemini
+      ui:options:
+        labels:
+          - OpenAI
+          - Claude
+          - Gemini
+    value: openai
+  - handle: key
+    json_schema:
+      contentMediaType: oomol/secret
+      type: string
+    value: ""
+    nullable: true
+  - handle: url
+    json_schema:
+      type: string
+    value:
+    nullable: true
+  - handle: model
+    json_schema:
+      type: string
+    value: ""
+  - handle: temperature
+    json_schema:
+      type: number
+      minimum: 0
+    value: 0
+  - handle: timeout
+    json_schema:
+      type: number
+      exclusiveMinimum: 0
+    value:
+    nullable: true
+  - handle: source_lan
+    json_schema:
+      enum:
+        - en
+        - cn
+        - fr
+        - ru
+        - de
+      ui:options:
+        labels:
+          - English
+          - 中文
+          - Français
+          - Русский
+          - Deutsch
+    value:
+    nullable: true
+  - handle: target_lan
+    json_schema:
+      enum:
+        - en
+        - cn
+        - fr
+        - ru
+        - de
+      ui:options:
+        labels:
+          - English
+          - 中文
+          - Français
+          - Русский
+          - Deutsch
+    nullable: false
+  - handle: group_max_tokens
+    json_schema:
+      type: integer
+      exclusiveMinimum: 0
+    value: 4000
+outputs_def:
+  - handle: texts
+    description: Output
+    json_schema:
+      type: array
+      items:
+        type: string
+ui:
+  default_width: 508.0272091228371
+executor:
+  name: python
+  options:
+    spawn: false
+    entry: main.py
+title: Translate texts list
+icon: ":twemoji:globe-with-meridians:"

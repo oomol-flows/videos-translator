@@ -7,4 +7,4 @@ scripts:
 icon: ./icon.png
 dependencies:
   ffmpeg-mac: 0.0.4
-  whisper: 0.0.1
+  whisper: 0.0.2

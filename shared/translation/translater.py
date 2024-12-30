@@ -1,5 +1,6 @@
 import re
 
+from typing import Callable
 from .group import Group
 from .llm import LLM, LLM_API
 
@@ -38,8 +39,9 @@ class Translater:
       source_lan=None if source_lan is None else self._lan_full_name(source_lan),
     )
 
-  def translate(self, source_texts: list[str]) -> list[str]:
+  def translate(self, source_texts: list[str], report_progress: Callable[[float], None]) -> list[str]:
     target_texts: list[str] = [""] * len(source_texts)
+    max_index: int = 0
 
     for chunk in self._group.split(source_texts):
       chunk_texts: list[str] = []
@@ -55,6 +57,9 @@ class Translater:
       
       for index, text in zip(chunk_indexes, chunk_texts):
         target_texts[index] = text
+        max_index = max(index, max_index)
+      
+      report_progress(float(max_index + 1) / float(len(source_texts)))
 
     return target_texts
 

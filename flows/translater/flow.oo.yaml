@@ -54,3 +54,66 @@ nodes:
         value: false
       - handle: prompt
         value: ""
+  - task: self::translater
+    title: "Translate texts list #2"
+    node_id: translater#2
+    inputs_from:
+      - handle: texts
+        value:
+          []
+        from_node:
+          - node_id: +python#2
+            output_handle: texts
+      - handle: llm_api
+        value: openai
+      - handle: key
+        value: ""
+      - handle: url
+        value:
+      - handle: model
+        value: ""
+      - handle: temperature
+        value: 0
+      - handle: timeout
+        value:
+      - handle: source_lan
+        value:
+      - handle: target_lan
+      - handle: group_max_tokens
+        value: 4000
+  - task:
+      ui:
+        default_width: 450
+      inputs_def:
+        - handle: segments
+          description: Input
+          json_schema:
+            type: array
+            items:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+      outputs_def:
+        - handle: texts
+          description: Output
+          json_schema:
+            type: array
+            items:
+              type: string
+      executor:
+        name: python
+        options:
+          entry: scriptlets/+python#2.py
+    title: "Convert to texts list"
+    icon: ":logos:python:"
+    node_id: +python#2
+    inputs_from:
+      - handle: segments
+        value:
+          []
+        from_node:
+          - node_id: whisper#1
+            output_handle: segments
