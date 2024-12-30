@@ -51,7 +51,7 @@ class Translater:
         if text != "":
           chunk_texts.append(text)
           chunk_indexes.append(index)
-      
+
       if len(chunk_texts) > 0:
         chunk_texts = self._translate_texts(chunk_texts)
       
@@ -70,9 +70,9 @@ class Translater:
     )
     target_texts: list[str] = []
     for line in content.split("\n"):
-      match = re.search(r"^\d+\:", line)
+      match = re.search(r"^\d+(\:|\.)", line)
       if match:
-        text = re.sub(r"^\d+\:\s*", "", line)
+        text = re.sub(r"^\d+(\:|\.)\s*", "", line)
         target_texts.append(text)
 
     return target_texts
@@ -88,7 +88,7 @@ def _gen_admin_prompt(target_lan: str, source_lan: str | None) -> str:
     source_lan = "any language and you will detect the language"
   return f"""
 I want you to act as an {target_lan} translator, spelling corrector and improver. 
-Next user will speak to you in {source_lan}, translate it and answer in the corrected and improved version of my text, in Chinese. 
+Next user will speak to you in {source_lan}, translate it and answer in the corrected and improved version of my text, in {target_lan}. 
 I want you to replace simplified A0-level words and sentences with more beautiful and elegant, upper level Chinese words and sentences. Keep the meaning same, but make them more literary. 
 I want you to only reply the correction, the improvements and nothing else, do not write explanations.
 Next user will speak a passage. The passage is divided into multiple lines, each line starting with a number (an Arabic numeral followed by a colon).
