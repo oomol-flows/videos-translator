@@ -1,7 +1,8 @@
 import re
+import math
 
 from typing import Callable
-from .group import Group
+from .group import Group, Fragment
 from .llm import LLM, LLM_API
 
 _lan_full_name: dict[str, str] = {
@@ -14,18 +15,21 @@ _lan_full_name: dict[str, str] = {
 
 class Translater:
   def __init__(
-      self,
-      group_max_tokens: int,
-      api: LLM_API, 
-      key: str | None, 
-      url: str | None, 
-      model: str,
-      temperature: float,
-      timeout: float | None,
-      source_lan: str,
-      target_lan: str,
-    ) -> None:
-    self._group: Group = Group(group_max_tokens)
+        self,
+        group_max_tokens: int,
+        api: LLM_API, 
+        key: str | None, 
+        url: str | None, 
+        model: str,
+        temperature: float,
+        timeout: float | None,
+        source_lan: str,
+        target_lan: str,
+      ) -> None:
+    self._group: Group = Group(
+      group_max_tokens=group_max_tokens, 
+      interval_max_tokens=math.ceil(float(group_max_tokens) * 0.1),
+    )
     self._llm = LLM(
       api=api,
       key=key,
@@ -41,27 +45,32 @@ class Translater:
 
   def translate(self, source_texts: list[str], report_progress: Callable[[float], None]) -> list[str]:
     target_texts: list[str] = [""] * len(source_texts)
-    max_index: int = 0
+    grouped_fragments = self._group.split(source_texts)
+    operated_id: int = 0
 
-    for chunk in self._group.split(source_texts):
-      chunk_texts: list[str] = []
-      chunk_indexes: list[int] = []
-      for index, text in chunk:
-        text = text.strip()
-        if text != "":
-          chunk_texts.append(text)
-          chunk_indexes.append(index)
-
-      if len(chunk_texts) > 0:
-        chunk_texts = self._translate_texts(chunk_texts)
-      
-      for index, text in zip(chunk_indexes, chunk_texts):
-        target_texts[index] = text
-        max_index = max(index, max_index)
-      
-      report_progress(float(max_index + 1) / float(len(source_texts)))
+    for fragments in grouped_fragments:
+      for fragment in self._translate_fragments(fragments):
+        if operated_id > fragment.id:
+          continue # fragment may be duplicated
+        operated_id = max(operated_id, fragment.id)
+        target_texts[fragment.index] += fragment.target
+      report_progress(float(operated_id + 1) / float(len(source_texts)))
 
     return target_texts
+
+  def _translate_fragments(self, fragments: list[Fragment]) -> list[Fragment]:
+    texts: list[str] = []
+    indexes: list[int] = []
+    for index, fragment in enumerate(fragments):
+      text = fragment.origin.strip()
+      if text != "":
+        texts.append(text)
+        indexes.append(index)
+    if len(texts) > 0:
+      texts = self._translate_texts(texts)
+    for index, text in zip(indexes, texts):
+      fragments[index].target = text
+    return fragments
 
   def _translate_texts(self, texts: list[str]) -> list[str]:
     texts = [f"{i+1}: {t}" for i, t in enumerate(texts)]

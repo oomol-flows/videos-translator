@@ -65,7 +65,7 @@ nodes:
         value:
       - handle: target_lan
       - handle: group_max_tokens
-        value: 4000
+        value: 1000
   - task:
       ui:
         default_width: 450

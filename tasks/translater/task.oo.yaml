@@ -81,7 +81,7 @@ inputs_def:
     json_schema:
       type: integer
       exclusiveMinimum: 0
-    value: 4000
+    value: 1000
 outputs_def:
   - handle: texts
     description: Output
