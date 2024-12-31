@@ -60,8 +60,7 @@ inputs_def:
           - Français
           - Русский
           - Deutsch
-    value:
-    nullable: true
+    nullable: false
   - handle: target_lan
     json_schema:
       enum:
@@ -82,7 +81,7 @@ inputs_def:
     json_schema:
       type: integer
       exclusiveMinimum: 0
-    value: 4000
+    value: 1000
 outputs_def:
   - handle: texts
     description: Output
