@@ -23,7 +23,7 @@ inputs_def:
     json_schema:
       contentMediaType: oomol/secret
       type: string
-    value: ""
+    value:
     nullable: true
   - handle: url
     json_schema:
@@ -33,7 +33,8 @@ inputs_def:
   - handle: model
     json_schema:
       type: string
-    value: ""
+    value:
+    nullable: true
   - handle: temperature
     json_schema:
       type: number

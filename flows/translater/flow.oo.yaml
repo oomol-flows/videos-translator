@@ -3,7 +3,6 @@ nodes:
     node_id: read_media_to_ffmpeg#1
     inputs_from:
       - handle: video_source
-        value:
         from_node:
           - node_id: +python#3
             output_handle: path
@@ -42,29 +41,6 @@ nodes:
         value: false
       - handle: prompt
         value: ""
-  - task: self::translater
-    title: "Translate texts list #2"
-    node_id: translater#2
-    inputs_from:
-      - handle: texts
-        value:
-          []
-        from_node:
-          - node_id: +python#2
-            output_handle: texts
-      - handle: llm_api
-        value: openai
-      - handle: key
-      - handle: url
-      - handle: model
-      - handle: temperature
-        value: 0
-      - handle: timeout
-        value:
-      - handle: source_lan
-      - handle: target_lan
-      - handle: group_max_tokens
-        value: 1000
   - task:
       ui:
         default_width: 450
@@ -234,7 +210,7 @@ nodes:
         value:
           []
         from_node:
-          - node_id: translater#2
+          - node_id: translate-texts-list#1
             output_handle: texts
   - task: whisper::whisper_segments_to_srt
     title: "Whisper segments to SRT #2"
@@ -294,7 +270,7 @@ nodes:
       - handle: formate
         value:
       - handle: file_name
-        value:
+        value: translated
       - handle: save_address
         value:
   - task:
@@ -322,3 +298,30 @@ nodes:
     node_id: +python#3
     inputs_from:
       - handle: video_path
+        value:
+  - task: self::translate-texts-list
+    title: "Translate texts list #1"
+    node_id: translate-texts-list#1
+    inputs_from:
+      - handle: texts
+        value:
+          []
+        from_node:
+          - node_id: +python#2
+            output_handle: texts
+      - handle: llm_api
+        value: openai
+      - handle: key
+        value:
+      - handle: url
+        value:
+      - handle: model
+        value:
+      - handle: temperature
+        value: 0
+      - handle: timeout
+        value:
+      - handle: source_lan
+      - handle: target_lan
+      - handle: group_max_tokens
+        value: 1000
