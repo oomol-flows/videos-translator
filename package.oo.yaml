@@ -6,7 +6,7 @@ scripts:
     pnpm install && pip install -r requirements.txt
 icon: ./icon.png
 dependencies:
-  ffmpeg-mac: 0.0.4
+  ffmpeg-mac: 0.0.6
   whisper: 0.0.2
   oomol-transform: 0.0.1
   oomol-file: 0.0.1

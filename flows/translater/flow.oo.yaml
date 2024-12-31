@@ -13,21 +13,6 @@ nodes:
           - node_id: read_media_to_ffmpeg#1
             output_handle: ffmpeg_source
     title: Split audio
-  - task: ffmpeg-mac::save_and_preivew
-    node_id: save_and_preivew#1
-    inputs_from:
-      - handle: ffmpeg_source
-        value: ""
-        from_node:
-          - node_id: audio_video_separation#1
-            output_handle: ffmpeg_only_audio
-      - handle: file_name
-        value: audio
-      - handle: formate
-        value: mp3
-      - handle: save_address
-        value:
-    title: Save and prevew
   - task: whisper::whisper-model
     title: "Whisper model #1"
     node_id: whisper-model#1
@@ -44,7 +29,7 @@ nodes:
     inputs_from:
       - handle: audio_file
         from_node:
-          - node_id: save_and_preivew#1
+          - node_id: save_audio#1
             output_handle: file_adress
       - handle: model
         from_node:
@@ -278,3 +263,17 @@ nodes:
         from_node:
           - node_id: encode-string#1
             output_handle: binary
+  - task: ffmpeg-mac::save_audio
+    title: "Save Audio #1"
+    node_id: save_audio#1
+    inputs_from:
+      - handle: audio_source
+        from_node:
+          - node_id: audio_video_separation#1
+            output_handle: only_audio
+      - handle: file_name
+        value:
+      - handle: formate
+        value:
+      - handle: save_address
+        value:
