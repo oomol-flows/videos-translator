@@ -13,11 +13,12 @@ def main(params: dict, context: Context):
   else:
     raise ValueError(f"Invalid LLM API: {llm_api}")
 
+  oomol_llm_env = context.oomol_llm_env
   translater = Translater(
     api=api,
-    key=params["key"],
-    url=params["url"],
-    model=params["model"],
+    key=_default(params["key"], oomol_llm_env["token"]),
+    url=_default(params["url"], oomol_llm_env["base_url"]),
+    model=_default(params["model"], oomol_llm_env["models"][0]),
     temperature=params["temperature"],
     timeout=params["timeout"],
     source_lan=params["source_lan"],
@@ -29,3 +30,9 @@ def main(params: dict, context: Context):
     report_progress=lambda p: context.report_progress(p * 100.0),
   )
   return { "texts": target_texts }
+
+def _default(value: str | None, default_value: str) -> str:
+  if value is None:
+    return default_value
+  else:
+    return value
