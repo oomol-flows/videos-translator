@@ -268,7 +268,7 @@ nodes:
           - node_id: write-temp-file#1
             output_handle: file_path
       - handle: formate
-        value:
+        value: mp4
       - handle: file_name
         value: translated
       - handle: save_address
@@ -295,15 +295,23 @@ nodes:
         value: 0
       - handle: timeout
         value:
-      - handle: source_lan
-      - handle: target_lan
       - handle: group_max_tokens
         value: 1000
+      - handle: source
+      - handle: target
   - values:
       - handle: video_path
         json_schema:
           type: string
           ui:widget: file
-        value: ""
+        nullable: false
     title: Video path
     node_id: +value#1
+  - task: oomol-preview::video-preview
+    title: "Video preview #1"
+    node_id: video-preview#1
+    inputs_from:
+      - handle: video_path
+        from_node:
+          - node_id: +value#1
+            output_handle: video_path
