@@ -21,7 +21,7 @@ inputs_def:
           - Claude
           - Gemini
     value: oomol
-  - handle: key
+  - handle: api_key
     json_schema:
       contentMediaType: oomol/secret
       type: string

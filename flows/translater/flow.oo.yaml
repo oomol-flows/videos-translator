@@ -285,8 +285,6 @@ nodes:
             output_handle: texts
       - handle: llm_api
         value: oomol
-      - handle: key
-        value:
       - handle: url
         value:
       - handle: model
@@ -299,6 +297,8 @@ nodes:
         value: 1000
       - handle: source
       - handle: target
+      - handle: api_key
+        value:
   - values:
       - handle: video_path
         json_schema:
