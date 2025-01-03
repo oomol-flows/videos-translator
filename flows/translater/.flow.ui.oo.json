@@ -107,26 +107,21 @@
         }
       }
     },
-    "+python#3": {
-      "contentWidth": 397.97714145031165,
-      "rfNode": {
-        "position": {
-          "x": -238.89810022459258,
-          "y": -452.919496716066
-        }
-      },
-      "sections": {
-        "scriptlet": {
-          "manualHeight": 59.20102697003177
-        }
-      }
-    },
     "translate-texts-list#1": {
       "contentWidth": 508.0272091228371,
       "rfNode": {
         "position": {
           "x": 2595.5369153947663,
           "y": 79
+        }
+      }
+    },
+    "+value#1": {
+      "contentWidth": 459.9310394165456,
+      "rfNode": {
+        "position": {
+          "x": -325.14520094393964,
+          "y": 494.0606842179927
         }
       }
     }

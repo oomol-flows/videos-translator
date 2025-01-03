@@ -103,7 +103,7 @@ ui:
 executor:
   name: python
   options:
+    entry: __init__.py
     spawn: false
-    entry: main.py
 title: Translate texts list
 icon: ":twemoji:globe-with-meridians:"
