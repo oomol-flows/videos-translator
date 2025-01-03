@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -20,8 +20,9 @@ dependencies:
   oomol-file: 0.0.1
   oomol-preview: 0.0.1
 name: videos-translater
-releaseType: project
-platform:
-  - os: ""
+releaseNotes: fix bug
+displayName: Video Translater
 repository: https://github.com/oomol-flows/videos-translater
-releaseNotes: init the first version
+description: Add subtitles to the video in the corresponding language. Recognize
+  the speech of the video, extract
+releaseType: project
