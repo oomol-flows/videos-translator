@@ -10,15 +10,17 @@ inputs_def:
   - handle: llm_api
     json_schema:
       enum:
+        - oomol
         - openai
         - claude
         - gemini
       ui:options:
         labels:
+          - OOMOL
           - OpenAI
           - Claude
           - Gemini
-    value: openai
+    value: oomol
   - handle: key
     json_schema:
       contentMediaType: oomol/secret
@@ -28,11 +30,13 @@ inputs_def:
   - handle: url
     json_schema:
       type: string
+      minLength: 1
     value:
     nullable: true
   - handle: model
     json_schema:
       type: string
+      minLength: 1
     value:
     nullable: true
   - handle: temperature
@@ -51,6 +55,7 @@ inputs_def:
       enum:
         - en
         - cn
+        - ja
         - fr
         - ru
         - de
@@ -58,6 +63,7 @@ inputs_def:
         labels:
           - English
           - 中文
+          - 日本語
           - Français
           - Русский
           - Deutsch
@@ -67,6 +73,7 @@ inputs_def:
       enum:
         - en
         - cn
+        - ja
         - fr
         - ru
         - de
@@ -74,6 +81,7 @@ inputs_def:
         labels:
           - English
           - 中文
+          - 日本語
           - Français
           - Русский
           - Deutsch

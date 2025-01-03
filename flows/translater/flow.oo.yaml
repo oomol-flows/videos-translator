@@ -310,7 +310,7 @@ nodes:
           - node_id: +python#2
             output_handle: texts
       - handle: llm_api
-        value: openai
+        value: oomol
       - handle: key
         value:
       - handle: url
