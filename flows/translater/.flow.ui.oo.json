@@ -36,15 +36,6 @@
         }
       }
     },
-    "translater#2": {
-      "contentWidth": 508.0272091228371,
-      "rfNode": {
-        "position": {
-          "x": 2573.5738410577155,
-          "y": 73.13104547781708
-        }
-      }
-    },
     "+python#2": {
       "contentWidth": 479.50622646865156,
       "rfNode": {
@@ -127,6 +118,15 @@
       "sections": {
         "scriptlet": {
           "manualHeight": 59.20102697003177
+        }
+      }
+    },
+    "translate-texts-list#1": {
+      "contentWidth": 508.0272091228371,
+      "rfNode": {
+        "position": {
+          "x": 2595.5369153947663,
+          "y": 79
         }
       }
     }
