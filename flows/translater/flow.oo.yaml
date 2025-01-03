@@ -4,8 +4,8 @@ nodes:
     inputs_from:
       - handle: video_source
         from_node:
-          - node_id: +python#3
-            output_handle: path
+          - node_id: +value#1
+            output_handle: video_path
     title: Read media file
   - task: ffmpeg-mac::audio_video_separation
     node_id: audio_video_separation#1
@@ -259,8 +259,8 @@ nodes:
       - handle: video_file
         value:
         from_node:
-          - node_id: +python#3
-            output_handle: path
+          - node_id: +value#1
+            output_handle: video_path
       - handle: audio_file
         value:
       - handle: srt
@@ -268,36 +268,10 @@ nodes:
           - node_id: write-temp-file#1
             output_handle: file_path
       - handle: formate
-        value:
+        value: mp4
       - handle: file_name
         value: translated
       - handle: save_address
-        value:
-  - task:
-      ui:
-        default_width: 450
-      inputs_def:
-        - handle: video_path
-          description: Input
-          json_schema:
-            type: string
-            ui:widget: file
-          nullable: false
-      outputs_def:
-        - handle: path
-          description: Output
-          json_schema:
-            type: string
-            ui:widget: file
-      executor:
-        name: python
-        options:
-          entry: scriptlets/+python#3.py
-    title: Set video file path
-    icon: ":logos:python:"
-    node_id: +python#3
-    inputs_from:
-      - handle: video_path
         value:
   - task: self::translate-texts-list
     title: "Translate texts list #1"
@@ -321,7 +295,23 @@ nodes:
         value: 0
       - handle: timeout
         value:
-      - handle: source_lan
-      - handle: target_lan
       - handle: group_max_tokens
         value: 1000
+      - handle: source
+      - handle: target
+  - values:
+      - handle: video_path
+        json_schema:
+          type: string
+          ui:widget: file
+        nullable: false
+    title: Video path
+    node_id: +value#1
+  - task: oomol-preview::video-preview
+    title: "Video preview #1"
+    node_id: video-preview#1
+    inputs_from:
+      - handle: video_path
+        from_node:
+          - node_id: +value#1
+            output_handle: video_path

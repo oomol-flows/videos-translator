@@ -18,3 +18,10 @@ dependencies:
   whisper: 0.0.2
   oomol-transform: 0.0.1
   oomol-file: 0.0.1
+  oomol-preview: 0.0.1
+name: videos-translater
+releaseType: project
+platform:
+  - os: ""
+repository: https://github.com/oomol-flows/videos-translater
+releaseNotes: init the first version

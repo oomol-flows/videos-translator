@@ -17,7 +17,7 @@ def main(params: dict, context: Context):
     timeout=timeout,
     source_lan=params["source"],
     target_lan=params["target"],
-    group_max_tokens=params["max_translating_group"],
+    group_max_tokens=params["group_max_tokens"],
     streaming=True,
   )
   target_texts = translater.translate(

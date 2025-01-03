@@ -50,7 +50,7 @@ inputs_def:
       exclusiveMinimum: 0
     value:
     nullable: true
-  - handle: source_lan
+  - handle: source
     json_schema:
       enum:
         - en
@@ -68,7 +68,7 @@ inputs_def:
           - Русский
           - Deutsch
     nullable: false
-  - handle: target_lan
+  - handle: target
     json_schema:
       enum:
         - en
@@ -103,7 +103,7 @@ ui:
 executor:
   name: python
   options:
+    entry: __init__.py
     spawn: false
-    entry: main.py
 title: Translate texts list
 icon: ":twemoji:globe-with-meridians:"
