@@ -1,23 +1,5 @@
 {
   "nodes": {
-    "read_media_to_ffmpeg#1": {
-      "contentWidth": 350,
-      "rfNode": {
-        "position": {
-          "x": 229.29016268999897,
-          "y": 691.4851284428594
-        }
-      }
-    },
-    "audio_video_separation#1": {
-      "contentWidth": 402.41772120102206,
-      "rfNode": {
-        "position": {
-          "x": 672.8709837310001,
-          "y": 429.4851284428594
-        }
-      }
-    },
     "whisper-model#1": {
       "contentWidth": 350,
       "rfNode": {
@@ -72,38 +54,11 @@
         }
       }
     },
-    "encode-string#1": {
-      "contentWidth": 450,
-      "rfNode": {
-        "position": {
-          "x": 4347.656184447688,
-          "y": 456.48512844285943
-        }
-      }
-    },
     "write-temp-file#1": {
       "rfNode": {
         "position": {
           "x": 4875.600643606729,
           "y": 456.48512844285943
-        }
-      }
-    },
-    "save_audio#1": {
-      "contentWidth": 350,
-      "rfNode": {
-        "position": {
-          "x": 1140.29958644464,
-          "y": 62.62606311026592
-        }
-      }
-    },
-    "media_merge#1": {
-      "contentWidth": 450,
-      "rfNode": {
-        "position": {
-          "x": 5489.702560426581,
-          "y": 277.67198945231223
         }
       }
     },
@@ -131,6 +86,42 @@
         "position": {
           "x": 186.25753687699654,
           "y": 215.67198945231223
+        }
+      }
+    },
+    "read_media_to_ffmpeg#2": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 225.34400075612223,
+          "y": 648.9551673694208
+        }
+      }
+    },
+    "audio_video_separation#2": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 691.0721760069746,
+          "y": 437.83235352619374
+        }
+      }
+    },
+    "save_audio#2": {
+      "contentWidth": 350,
+      "rfNode": {
+        "position": {
+          "x": 1148.615327216623,
+          "y": 205.06068421799267
+        }
+      }
+    },
+    "media_merge#2": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 5432.339587316905,
+          "y": 285.98210864763496
         }
       }
     }
