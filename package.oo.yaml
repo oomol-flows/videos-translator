@@ -1,4 +1,4 @@
-version: 0.0.2
+version: 0.0.3
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -20,7 +20,7 @@ dependencies:
   oomol-preview: 0.0.1
   ffmpeg: 0.0.1
 name: videos-translater
-releaseNotes: fix bug
+releaseNotes: replace with new ffmpeg to support Windows device.
 displayName: Video Translater
 repository: https://github.com/oomol-flows/videos-translater
 description: Add subtitles to the video in the corresponding language. Recognize
