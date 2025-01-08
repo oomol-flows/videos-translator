@@ -1,20 +1,4 @@
 nodes:
-  - task: ffmpeg-mac::read_media_to_ffmpeg
-    node_id: read_media_to_ffmpeg#1
-    inputs_from:
-      - handle: video_source
-        from_node:
-          - node_id: +value#1
-            output_handle: video_path
-    title: Read media file
-  - task: ffmpeg-mac::audio_video_separation
-    node_id: audio_video_separation#1
-    inputs_from:
-      - handle: ffmpeg_source
-        from_node:
-          - node_id: read_media_to_ffmpeg#1
-            output_handle: ffmpeg_source
-    title: Split audio
   - task: whisper::whisper-model
     title: "Whisper model #1"
     node_id: whisper-model#1
@@ -31,7 +15,7 @@ nodes:
     inputs_from:
       - handle: audio_file
         from_node:
-          - node_id: save_audio#1
+          - node_id: save_audio#2
             output_handle: file_adress
       - handle: model
         from_node:
@@ -238,41 +222,6 @@ nodes:
         from_node:
           - node_id: encode-string#1
             output_handle: binary
-  - task: ffmpeg-mac::save_audio
-    title: "Save Audio #1"
-    node_id: save_audio#1
-    inputs_from:
-      - handle: audio_source
-        from_node:
-          - node_id: audio_video_separation#1
-            output_handle: only_audio
-      - handle: file_name
-        value:
-      - handle: formate
-        value:
-      - handle: save_address
-        value:
-  - task: ffmpeg-mac::media_merge
-    title: "Media Merge #1"
-    node_id: media_merge#1
-    inputs_from:
-      - handle: video_file
-        value:
-        from_node:
-          - node_id: +value#1
-            output_handle: video_path
-      - handle: audio_file
-        value:
-      - handle: srt
-        from_node:
-          - node_id: write-temp-file#1
-            output_handle: file_path
-      - handle: formate
-        value: mp4
-      - handle: file_name
-        value: translated
-      - handle: save_address
-        value:
   - task: self::translate-texts-list
     title: "Translate texts list #1"
     node_id: translate-texts-list#1
@@ -315,3 +264,56 @@ nodes:
         from_node:
           - node_id: +value#1
             output_handle: video_path
+  - task: ffmpeg::read_media_to_ffmpeg
+    title: "Read Media To FFmpeg #2"
+    node_id: read_media_to_ffmpeg#2
+    inputs_from:
+      - handle: video_source
+        value: ""
+        from_node:
+          - node_id: +value#1
+            output_handle: video_path
+  - task: ffmpeg::audio_video_separation
+    title: "Audio Video Separation #2"
+    node_id: audio_video_separation#2
+    inputs_from:
+      - handle: ffmpeg_source
+        from_node:
+          - node_id: read_media_to_ffmpeg#2
+            output_handle: ffmpeg_source
+  - task: ffmpeg::save_audio
+    title: "Save Audio #2"
+    node_id: save_audio#2
+    inputs_from:
+      - handle: audio_source
+        from_node:
+          - node_id: audio_video_separation#2
+            output_handle: only_audio
+      - handle: file_name
+        value:
+      - handle: formate
+        value:
+      - handle: save_address
+        value:
+  - task: ffmpeg::media_merge
+    title: "Media Merge #2"
+    node_id: media_merge#2
+    inputs_from:
+      - handle: video_file
+        value: ""
+        from_node:
+          - node_id: +value#1
+            output_handle: video_path
+      - handle: audio_file
+        value:
+      - handle: srt
+        value:
+        from_node:
+          - node_id: write-temp-file#1
+            output_handle: file_path
+      - handle: formate
+        value:
+      - handle: file_name
+        value:
+      - handle: save_address
+        value:
