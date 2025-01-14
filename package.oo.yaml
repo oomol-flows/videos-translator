@@ -1,4 +1,4 @@
-version: 0.0.3
+version: 0.0.4
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -7,7 +7,7 @@ scripts:
     set -e
     sudo apt-get update
     pip install --upgrade pip
-    pip install -r requirements.txt
+    BLIS_ARCH="generic" pip install -r requirements.txt
     python -m spacy download en_core_web_sm
     python -m spacy download zh_core_web_sm
     python -m spacy download fr_core_news_sm
@@ -20,9 +20,9 @@ dependencies:
   oomol-preview: 0.0.1
   ffmpeg: 0.0.1
 name: videos-translater
-releaseNotes: replace with new ffmpeg to support Windows device.
+releaseNotes: fix bootstrap fail
 displayName: Video Translater
-repository: https://github.com/oomol-flows/videos-translater
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
 releaseType: project
+repository: https://github.com/oomol-flows/videos-translater
