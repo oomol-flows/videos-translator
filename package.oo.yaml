@@ -17,7 +17,7 @@ dependencies:
   whisper: 0.0.3
   oomol-transform: 0.0.3
   oomol-file: 0.0.9
-  ffmpeg: 0.0.7
+  ffmpeg: 0.0.8
   oomol-preview: 0.0.2
 name: videos-translater
 releaseNotes: upgrade dependencies.
