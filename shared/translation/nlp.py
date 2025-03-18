@@ -5,7 +5,6 @@ import threading
 
 from spacy.language import Language
 
-
 _lan2model: dict = {
   "en": "en_core_web_sm",
   "zh": "zh_core_web_sm",
