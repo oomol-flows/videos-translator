@@ -224,22 +224,18 @@ nodes:
         from_node:
           - node_id: +python#2
             output_handle: texts
-      - handle: llm_api
-        value: oomol
-      - handle: url
-        value:
-      - handle: model
-        value:
-      - handle: temperature
-        value: 0
       - handle: timeout
         value:
       - handle: group_max_tokens
         value: 1000
       - handle: source
       - handle: target
-      - handle: api_key
+      - handle: llm
         value:
+          model: deepseek-chat
+          temperature: 0
+          top_p: 0.5
+          max_tokens: 4096
   - values:
       - handle: video_path
         json_schema:
