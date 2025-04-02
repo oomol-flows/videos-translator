@@ -2,7 +2,7 @@ import re
 
 from typing import Callable, Iterable
 from .group import Group, Fragment
-from .llm import LLM, LLM_API
+from .llm import LLM
 
 _LAN_FULL_NAMES: dict[str, str] = {
   "en": "English",
@@ -17,7 +17,6 @@ class Translater:
   def __init__(
         self,
         group_max_tokens: int,
-        api: LLM_API,
         key: str | None,
         url: str | None,
         model: str,
@@ -33,7 +32,6 @@ class Translater:
       gap_rate=0.1,
     )
     self._llm = LLM(
-      api=api,
       key=key,
       url=url,
       model=model,
