@@ -1,6 +1,5 @@
 from oocana import Context
 from shared.translation import Translater
-from .llm_parser import parse
 
 #region generated meta
 import typing

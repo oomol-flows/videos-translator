@@ -76,6 +76,6 @@ ui:
 executor:
   name: python
   options:
-    entry: main.py
+    entry: __init__.py
     spawn: false
 title: Translate texts list
