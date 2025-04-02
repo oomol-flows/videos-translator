@@ -24,7 +24,8 @@ nodes:
       - handle: word_timestamps
         value: false
       - handle: prompt
-        value: ""
+        value:
+          []
   - task:
       ui:
         default_width: 450

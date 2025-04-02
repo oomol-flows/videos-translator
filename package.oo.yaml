@@ -14,7 +14,7 @@ scripts:
     python -m spacy download ru_core_news_sm
     python -m spacy download de_core_news_sm
 dependencies:
-  whisper: 0.0.4
+  whisper: 0.0.5
   oomol-transform: 0.0.3
   oomol-file: 0.0.10
   ffmpeg: 0.0.9
