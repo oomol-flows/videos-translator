@@ -1,4 +1,4 @@
-version: 0.0.8
+version: 0.0.9
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -20,9 +20,9 @@ dependencies:
   ffmpeg: 0.0.9
   oomol-preview: 0.0.3
 name: videos-translater
-releaseNotes: support new OOMOL studio LLM env
+releaseNotes: replace with LLM filed & migrate new translation logic
 displayName: Video Translater
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
-releaseType: project
 repository: https://github.com/oomol-flows/videos-translater
+releaseType: project
