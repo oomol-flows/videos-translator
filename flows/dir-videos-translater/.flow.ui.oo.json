@@ -1,0 +1,20 @@
+{
+  "nodes": {
+    "video-translater#1": {
+      "rfNode": {
+        "position": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    "videos-translater#1": {
+      "rfNode": {
+        "position": {
+          "x": -479.05777771436806,
+          "y": -66.88151944813349
+        }
+      }
+    }
+  }
+}

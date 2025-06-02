@@ -1,0 +1,57 @@
+{
+  "nodes": {
+    "map#1": {
+      "rfNode": {
+        "position": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    "list_files_from_folder#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": -1055.020422322951,
+          "y": 0
+        }
+      }
+    },
+    "video-filter#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": -554.5219715976975,
+          "y": 45.2700229834421
+        }
+      }
+    },
+    "iter_args#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": -894.9488078235224,
+          "y": 367
+        }
+      }
+    }
+  },
+  "pseudoNodes": {
+    "input": {
+      "rfNode": {
+        "position": {
+          "x": -1678.4525687342798,
+          "y": 45.2700229834421
+        }
+      }
+    },
+    "output": {
+      "rfNode": {
+        "position": {
+          "x": 533.3368405652128,
+          "y": 29.59758093615877
+        }
+      }
+    }
+  }
+}

@@ -26,6 +26,9 @@ nodes:
       - handle: prompt
         value:
           []
+        schema_overrides:
+          - schema:
+              type: array
   - task:
       ui:
         default_width: 450
@@ -230,30 +233,27 @@ nodes:
       - handle: group_max_tokens
         value: 1000
       - handle: source
+        from_flow:
+          - input_handle: source
       - handle: target
+        from_flow:
+          - input_handle: target
       - handle: llm
         value:
           model: deepseek-chat
           temperature: 1
           top_p: 0.8
           max_tokens: 4096
-  - values:
-      - handle: video_path
-        json_schema:
-          type: string
-          ui:widget: file
-        nullable: false
-    title: Video path
-    node_id: +value#1
   - task: ffmpeg::read_media_to_ffmpeg
     title: "Read Media To FFmpeg #2"
     node_id: read_media_to_ffmpeg#2
     inputs_from:
       - handle: video_source
         value: ""
+        from_flow:
+          - input_handle: video_path
         from_node:
-          - node_id: +value#1
-            output_handle: video_path
+          []
   - task: ffmpeg::audio_video_separation
     title: "Audio Video Separation #2"
     node_id: audio_video_separation#2
@@ -282,9 +282,10 @@ nodes:
     inputs_from:
       - handle: video_file
         value: ""
+        from_flow:
+          - input_handle: video_path
         from_node:
-          - node_id: +value#1
-            output_handle: video_path
+          []
       - handle: audio_file
         value:
       - handle: srt
@@ -303,9 +304,10 @@ nodes:
     node_id: video_preview#1
     inputs_from:
       - handle: video_path
+        from_flow:
+          - input_handle: video_path
         from_node:
-          - node_id: +value#1
-            output_handle: video_path
+          []
   - task: oomol-file::binary_save_as_file
     title: "Binary save as file #1"
     node_id: binary_save_as_file#1
@@ -318,3 +320,86 @@ nodes:
         value:
       - handle: file_path
         value:
+  - node_id: copy_file#1
+    title: "Copy file #1"
+    inputs_from:
+      - handle: source_file
+        from_node:
+          - node_id: media_merge#2
+            output_handle: media_file
+      - handle: destination_folder
+        value: null
+        from_flow:
+          - input_handle: destination_folder
+    task: oomol-file::copy_file
+inputs_def:
+  - handle: video_path
+    description: Input
+    json_schema:
+      type: string
+      ui:widget: file
+    kind: primitive
+    nullable: false
+  - handle: destination_folder
+    json_schema:
+      type: string
+      ui:widget: dir
+    kind: primitive
+    value:
+    nullable: true
+  - handle: source
+    json_schema:
+      enum:
+        - en
+        - cn
+        - ja
+        - fr
+        - ru
+        - de
+      ui:options:
+        labels:
+          - English
+          - 中文
+          - 日本語
+          - Français
+          - Русский
+          - Deutsch
+    kind: primitive
+    nullable: false
+  - handle: target
+    json_schema:
+      enum:
+        - en
+        - cn
+        - ja
+        - fr
+        - ru
+        - de
+      ui:options:
+        labels:
+          - English
+          - 中文
+          - 日本語
+          - Français
+          - Русский
+          - Deutsch
+    kind: primitive
+    nullable: false
+outputs_def:
+  - handle: destination_folder
+    json_schema:
+      type: string
+      ui:widget: dir
+    kind: primitive
+    nullable: false
+    description: Output
+outputs_from:
+  - handle: output
+    from_node:
+      []
+  - handle: destination_folder
+    from_node:
+      - node_id: copy_file#1
+        output_handle: destination_folder
+title: Video Translater
+icon: ":carbon:document-video:"

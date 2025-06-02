@@ -1,0 +1,11 @@
+nodes:
+  - node_id: videos-translater#5
+    title: "Dir Videos Translater #5"
+    inputs_from:
+      - handle: folder
+      - handle: destination_folder
+        value: null
+      - handle: source
+      - handle: target
+    subflow: self::videos-translater
+title: Dir Videos Translater
