@@ -21,9 +21,8 @@ dependencies:
   oomol-preview: 0.0.3
   array: 0.0.9
 name: videos-translater
-releaseNotes: replace with LLM filed & migrate new translation logic
+releaseNotes: update translater videos
 displayName: Video Translater
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
 repository: https://github.com/oomol-flows/videos-translater
-releaseType: project

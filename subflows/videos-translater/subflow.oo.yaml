@@ -149,7 +149,7 @@ inputs_def:
 outputs_def:
   - handle: array
     json_schema:
-      type: array
+      {}
     kind: primitive
     nullable: false
 outputs_from:

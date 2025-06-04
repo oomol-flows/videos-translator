@@ -1,6 +1,6 @@
 nodes:
-  - node_id: videos-translater#5
-    title: "Dir Videos Translater #5"
+  - node_id: videos-translater#1
+    title: "Dir Videos Translater #1"
     inputs_from:
       - handle: folder
       - handle: destination_folder
