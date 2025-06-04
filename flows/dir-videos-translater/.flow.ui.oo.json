@@ -1,0 +1,12 @@
+{
+  "nodes": {
+    "videos-translater#1": {
+      "rfNode": {
+        "position": {
+          "x": -24,
+          "y": 0
+        }
+      }
+    }
+  }
+}

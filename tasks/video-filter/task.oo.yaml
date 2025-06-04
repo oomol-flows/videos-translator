@@ -1,0 +1,26 @@
+ui:
+  default_width: 450
+inputs_def:
+  - handle: file_paths
+    json_schema:
+      type: array
+      items:
+        type: string
+        ui:widget: file
+    kind: primitive
+    nullable: false
+    description: Output
+outputs_def:
+  - handle: array
+    json_schema:
+      type: array
+      items:
+        {}
+    kind: primitive
+    nullable: false
+executor:
+  name: nodejs
+  options:
+    entry: main.ts
+    spawn: false
+icon: ":carbon:filter:"

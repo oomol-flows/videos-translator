@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "video-translater#1": {
+      "rfNode": {
+        "position": {
+          "x": 1002,
+          "y": 0
+        }
+      }
+    },
+    "+typescript#1": {
+      "contentWidth": 450,
+      "rfNode": {
+        "position": {
+          "x": 473.39587508020225,
+          "y": 243
+        }
+      },
+      "sections": {
+        "scriptlet": {
+          "cardCollapsed": true
+        }
+      }
+    }
+  },
+  "pseudoNodes": {
+    "input": {
+      "rfNode": {
+        "position": {
+          "x": 0,
+          "y": 72
+        }
+      }
+    },
+    "output": {
+      "rfNode": {
+        "position": {
+          "x": 1488,
+          "y": 99
+        }
+      }
+    }
+  }
+}
