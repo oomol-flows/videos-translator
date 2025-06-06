@@ -394,9 +394,6 @@ outputs_def:
     nullable: false
     description: Output
 outputs_from:
-  - handle: output
-    from_node:
-      []
   - handle: destination_folder
     from_node:
       - node_id: copy_file#1

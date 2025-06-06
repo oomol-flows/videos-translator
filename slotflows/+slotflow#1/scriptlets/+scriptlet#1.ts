@@ -1,5 +1,4 @@
 //#region generated meta
-import type { Context } from "@oomol/types/oocana";
 type Inputs = {
     args: any;
 };
