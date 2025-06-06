@@ -1,5 +1,4 @@
 //#region generated meta
-import type { Context } from "@oomol/types/oocana";
 type Inputs = {
     file_paths: string[];
 };
@@ -7,6 +6,8 @@ type Outputs = {
     array: any[];
 };
 //#endregion
+
+import type { Context } from "@oomol/types/oocana";
 
 export default async function(
     params: Inputs,
