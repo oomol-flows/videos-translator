@@ -14,11 +14,11 @@ scripts:
     python -m spacy download ru_core_news_sm
     python -m spacy download de_core_news_sm
 dependencies:
-  whisper: 0.0.6
-  oomol-transform: 0.0.3
+  whisper: 0.0.7
+  oomol-transform: 0.0.4
   oomol-file: 0.0.10
-  ffmpeg: 0.1.0
-  oomol-preview: 0.0.3
+  ffmpeg: 0.1.2
+  oomol-preview: 0.0.4
   array: 0.0.9
 name: videos-translater
 releaseNotes: fix type bug
