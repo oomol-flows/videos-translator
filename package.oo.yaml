@@ -1,4 +1,4 @@
-version: 0.1.0
+version: 0.1.1
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -20,7 +20,7 @@ dependencies:
   oomol-preview: 0.0.4
   array: 0.0.9
 name: videos-translater
-releaseNotes: fix type bug
+releaseNotes: migrate to poetry.
 displayName: Video Translater
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
