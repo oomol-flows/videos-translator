@@ -26,6 +26,9 @@ nodes:
       - handle: prompt
         value:
           []
+        schema_overrides:
+          - schema:
+              type: array
   - task:
       ui:
         default_width: 450
@@ -230,7 +233,13 @@ nodes:
       - handle: group_max_tokens
         value: 1000
       - handle: source
+        from_node:
+          - node_id: +value#1
+            output_handle: source
       - handle: target
+        from_node:
+          - node_id: +value#1
+            output_handle: target
       - handle: llm
         value:
           model: deepseek-chat
@@ -243,7 +252,45 @@ nodes:
           type: string
           ui:widget: file
         nullable: false
-    title: Video path
+      - handle: source
+        json_schema:
+          enum:
+            - en
+            - cn
+            - ja
+            - fr
+            - ru
+            - de
+          ui:options:
+            labels:
+              - English
+              - 中文
+              - 日本語
+              - Français
+              - Русский
+              - Deutsch
+        kind: primitive
+        nullable: false
+      - handle: target
+        json_schema:
+          enum:
+            - en
+            - cn
+            - ja
+            - fr
+            - ru
+            - de
+          ui:options:
+            labels:
+              - English
+              - 中文
+              - 日本語
+              - Français
+              - Русский
+              - Deutsch
+        kind: primitive
+        nullable: false
+    title: Video Input
     node_id: +value#1
   - task: ffmpeg::read_media_to_ffmpeg
     title: "Read Media To FFmpeg #2"
@@ -318,3 +365,6 @@ nodes:
         value:
       - handle: file_path
         value:
+        from_node:
+          - node_id: +value#1
+            output_handle: file_path
