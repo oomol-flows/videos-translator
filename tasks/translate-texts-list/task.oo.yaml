@@ -79,4 +79,3 @@ executor:
     entry: __init__.py
     spawn: false
 title: Translate texts list
-icon: ":carbon:document-requirements:"
