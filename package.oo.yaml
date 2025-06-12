@@ -1,4 +1,4 @@
-version: 0.0.9
+version: 0.1.2
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -6,23 +6,22 @@ scripts:
   bootstrap: |
     set -e
     sudo apt-get update
-    pip install --upgrade pip
-    BLIS_ARCH="generic" pip install -r requirements.txt
+    poetry install --no-root
     python -m spacy download en_core_web_sm
     python -m spacy download zh_core_web_sm
     python -m spacy download fr_core_news_sm
     python -m spacy download ru_core_news_sm
     python -m spacy download de_core_news_sm
 dependencies:
-  whisper: 0.0.5
-  oomol-transform: 0.0.3
+  whisper: 0.0.7
+  oomol-transform: 0.0.4
   oomol-file: 0.0.10
-  ffmpeg: 0.0.9
-  oomol-preview: 0.0.3
+  ffmpeg: 0.1.2
+  oomol-preview: 0.0.4
+  array: 0.0.9
 name: videos-translater
-releaseNotes: replace with LLM filed & migrate new translation logic
+releaseNotes: migrate to poetry.
 displayName: Video Translater
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
 repository: https://github.com/oomol-flows/videos-translater
-releaseType: project
