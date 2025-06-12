@@ -1,4 +1,4 @@
-version: 0.1.3
+version: 0.1.4
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -13,10 +13,10 @@ scripts:
     python -m spacy download ru_core_news_sm
     python -m spacy download de_core_news_sm
 dependencies:
-  whisper: 0.0.7
+  whisper: 0.0.8
   oomol-transform: 0.0.4
   oomol-file: 0.0.10
-  ffmpeg: 0.1.2
+  ffmpeg: 0.1.6
   oomol-preview: 0.0.4
   array: 0.0.9
 name: videos-translater
