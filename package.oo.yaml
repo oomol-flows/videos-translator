@@ -1,4 +1,4 @@
-version: 0.1.4
+version: 0.1.5
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -24,7 +24,7 @@ dependencies:
   oomol-preview: 0.0.5
   array: 0.1.0
 name: videos-translater
-releaseNotes: remove subflow logic.
+releaseNotes: update fields & download spacy from hugginface.
 displayName: Video Translater
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
