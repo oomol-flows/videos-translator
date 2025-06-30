@@ -1,4 +1,4 @@
-version: 0.1.4
+version: 0.1.5
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -17,14 +17,14 @@ scripts:
     pip install "ru_core_news_sm @ $hf_endpoint/spacy/ru_core_news_sm/resolve/main/ru_core_news_sm-any-py3-none-any.whl"
     pip install "de_core_news_sm @ $hf_endpoint/spacy/de_core_news_sm/resolve/main/de_core_news_sm-any-py3-none-any.whl"
 dependencies:
-  whisper: 0.0.8
+  whisper: 0.0.9
   oomol-transform: 0.0.4
-  oomol-file: 0.0.10
-  ffmpeg: 0.1.6
-  oomol-preview: 0.0.4
-  array: 0.0.9
+  oomol-file: 0.0.13
+  ffmpeg: 0.1.10
+  oomol-preview: 0.0.5
+  array: 0.1.0
 name: videos-translater
-releaseNotes: remove subflow logic.
+releaseNotes: update fields & download spacy from hugginface.
 displayName: Video Translater
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
