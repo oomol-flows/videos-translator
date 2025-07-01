@@ -1,4 +1,4 @@
-version: 0.1.5
+version: 0.1.6
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -23,9 +23,9 @@ dependencies:
   ffmpeg: 0.1.10
   oomol-preview: 0.0.5
   array: 0.1.0
-name: videos-translater
-releaseNotes: update fields & download spacy from hugginface.
-displayName: Video Translater
+name: videos-translator
+releaseNotes: update icon rename repo
+displayName: Video Translator
 description: Add subtitles to the video in the corresponding language. Recognize
   the speech of the video, extract
 repository: https://github.com/oomol-flows/videos-translater

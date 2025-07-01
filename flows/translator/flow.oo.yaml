@@ -242,7 +242,7 @@ nodes:
             output_handle: target
       - handle: llm
         value:
-          model: deepseek-chat
+          model: deepseek-v3-250324
           temperature: 1
           top_p: 0.8
           max_tokens: 4096
@@ -368,3 +368,4 @@ nodes:
         from_node:
           - node_id: +value#1
             output_handle: file_path
+title: translator

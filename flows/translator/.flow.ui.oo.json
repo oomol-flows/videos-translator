@@ -16,11 +16,6 @@
           "x": 6045.051965457275,
           "y": 1177.6215336661912
         }
-      },
-      "sections": {
-        "inputHandle": {
-          "cardCollapsed": true
-        }
       }
     },
     "+python#2": {
@@ -51,7 +46,7 @@
       }
     },
     "whisper_segments_to_srt#2": {
-      "contentWidth": 450,
+      "contentWidth": 350,
       "rfNode": {
         "position": {
           "x": 8303.968377778934,
