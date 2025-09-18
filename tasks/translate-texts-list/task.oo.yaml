@@ -1,6 +1,6 @@
 inputs_def:
   - handle: texts
-    description: Input
+    description: List of text strings to be translated
     json_schema:
       type: array
       items:
@@ -8,12 +8,14 @@ inputs_def:
     value:
       []
   - handle: timeout
+    description: Request timeout in seconds (optional)
     json_schema:
       type: number
       exclusiveMinimum: 0
     value:
     nullable: true
   - handle: llm
+    description: Language model configuration for translation
     json_schema:
       ui:options:
         title: Model
@@ -24,6 +26,7 @@ inputs_def:
       top_p: 0.8
       max_tokens: 4096
   - handle: source
+    description: Source language code
     json_schema:
       enum:
         - en
@@ -42,6 +45,7 @@ inputs_def:
           - Deutsch
     nullable: false
   - handle: target
+    description: Target language code for translation
     json_schema:
       enum:
         - en
@@ -60,13 +64,14 @@ inputs_def:
           - Deutsch
     nullable: false
   - handle: group_max_tokens
+    description: Maximum tokens per translation group
     json_schema:
       type: integer
       exclusiveMinimum: 0
     value: 1000
 outputs_def:
   - handle: texts
-    description: Output
+    description: List of translated text strings
     json_schema:
       type: array
       items:
@@ -79,4 +84,7 @@ executor:
     entry: __init__.py
     spawn: false
 title: Translate texts list
+description: "Translates a list of text strings from source language to target
+  language using AI models"
 icon: ":carbon:list-bulleted:"
+private: true

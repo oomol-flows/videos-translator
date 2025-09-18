@@ -1,0 +1,24 @@
+nodes:
+  - node_id: translator#2
+    title: "translator #2"
+    inputs_from:
+      - handle: video_path
+        value: /oomol-driver/oomol-storage/oomol-intro_trimmed.mp4
+      - handle: source
+        value: en
+      - handle: target
+        value: cn
+      - handle: llm
+        value:
+          model: deepseek-chat
+          temperature: 0.5
+          top_p: 1
+          max_tokens: 128000
+      - handle: font_size
+        value:
+      - handle: font_color
+        value:
+      - handle: outline_color
+        value:
+    subflow: self::translator
+title: translator-test

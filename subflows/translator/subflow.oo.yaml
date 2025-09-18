@@ -15,8 +15,8 @@ nodes:
     inputs_from:
       - handle: audio_file
         from_node:
-          - node_id: save_audio#2
-            output_handle: file_adress
+          - node_id: extract-audio#1
+            output_handle: audio_file
       - handle: model
         from_node:
           - node_id: whisper-model#1
@@ -34,7 +34,7 @@ nodes:
         default_width: 450
       inputs_def:
         - handle: segments
-          description: Input
+          description: Audio transcription segments from speech recognition
           json_schema:
             type: array
             items:
@@ -46,7 +46,7 @@ nodes:
                   type: string
       outputs_def:
         - handle: texts
-          description: Output
+          description: Extracted text strings from transcription segments
           json_schema:
             type: array
             items:
@@ -56,6 +56,7 @@ nodes:
         options:
           entry: scriptlets/+python#2.py
     title: "Convert to texts list"
+    description: "Extracts text content from transcription segments into a list format"
     icon: ":logos:python:"
     node_id: +python#2
     inputs_from:
@@ -70,13 +71,14 @@ nodes:
         default_width: 450
       inputs_def:
         - handle: texts
+          description: Translated text strings to replace original segment texts
           json_schema:
             type: array
             items:
               type: string
           value: ""
         - handle: segments
-          description: Input
+          description: Original transcription segments with timing information
           json_schema:
             type: array
             items:
@@ -130,7 +132,7 @@ nodes:
                         type: number
       outputs_def:
         - handle: segments
-          description: Output
+          description: Updated transcription segments with translated text
           json_schema:
             type: array
             items:
@@ -187,6 +189,8 @@ nodes:
         options:
           entry: scriptlets/+python#1.py
     title: Replace texts of segments
+    description: "Replaces the original text in transcription segments with
+      translated text while preserving timing"
     icon: ":logos:python:"
     node_id: +python#1
     inputs_from:
@@ -233,126 +237,32 @@ nodes:
       - handle: group_max_tokens
         value: 1000
       - handle: source
+        from_flow:
+          - input_handle: source
         from_node:
-          - node_id: +value#1
-            output_handle: source
+          []
       - handle: target
+        from_flow:
+          - input_handle: target
         from_node:
-          - node_id: +value#1
-            output_handle: target
+          []
       - handle: llm
         value:
           model: deepseek-v3-250324
           temperature: 1
           top_p: 0.8
           max_tokens: 4096
-  - values:
-      - handle: video_path
-        json_schema:
-          type: string
-          ui:widget: file
-        nullable: false
-      - handle: source
-        json_schema:
-          enum:
-            - en
-            - cn
-            - ja
-            - fr
-            - ru
-            - de
-          ui:options:
-            labels:
-              - English
-              - 中文
-              - 日本語
-              - Français
-              - Русский
-              - Deutsch
-        kind: primitive
-        nullable: false
-      - handle: target
-        json_schema:
-          enum:
-            - en
-            - cn
-            - ja
-            - fr
-            - ru
-            - de
-          ui:options:
-            labels:
-              - English
-              - 中文
-              - 日本語
-              - Français
-              - Русский
-              - Deutsch
-        kind: primitive
-        nullable: false
-    title: Video Input
-    node_id: +value#1
-  - task: ffmpeg::read_media_to_ffmpeg
-    title: "Read Media To FFmpeg #2"
-    node_id: read_media_to_ffmpeg#2
-    inputs_from:
-      - handle: video_source
-        value: ""
-        from_node:
-          - node_id: +value#1
-            output_handle: video_path
-  - task: ffmpeg::audio_video_separation
-    title: "Audio Video Separation #2"
-    node_id: audio_video_separation#2
-    inputs_from:
-      - handle: ffmpeg_source
-        from_node:
-          - node_id: read_media_to_ffmpeg#2
-            output_handle: ffmpeg_source
-  - task: ffmpeg::save_audio
-    title: "Save Audio #2"
-    node_id: save_audio#2
-    inputs_from:
-      - handle: audio_source
-        from_node:
-          - node_id: audio_video_separation#2
-            output_handle: only_audio
-      - handle: file_name
-        value:
-      - handle: save_address
-        value:
-      - handle: format
-        value:
-  - task: ffmpeg::media_merge
-    title: "Media Merge #2"
-    node_id: media_merge#2
-    inputs_from:
-      - handle: video_file
-        value: ""
-        from_node:
-          - node_id: +value#1
-            output_handle: video_path
-      - handle: audio_file
-        value:
-      - handle: srt
-        value:
-        from_node:
-          - node_id: binary_save_as_file#1
-            output_handle: file_path
-      - handle: formate
-        value:
-      - handle: file_name
-        value:
-      - handle: save_address
-        value:
+        from_flow:
+          - input_handle: llm
   - task: oomol-preview::video_preview
     title: "Video preview #1"
     node_id: video_preview#1
     inputs_from:
       - handle: video_path
+        from_flow:
+          - input_handle: video_path
         from_node:
-          - node_id: +value#1
-            output_handle: video_path
+          []
   - task: oomol-file::binary_save_as_file
     title: "Binary save as file #1"
     node_id: binary_save_as_file#1
@@ -366,6 +276,156 @@ nodes:
       - handle: file_path
         value:
         from_node:
-          - node_id: +value#1
+          []
+  - node_id: extract-audio#1
+    title: "Extract Audio from Video #1"
+    inputs_from:
+      - handle: video_file
+        from_flow:
+          - input_handle: video_path
+      - handle: output_format
+        value: mp3
+      - handle: audio_quality
+        value: 192
+    task: ffmpeg::extract-audio
+  - node_id: add-subtitles#1
+    title: "Add Video Subtitles #1"
+    inputs_from:
+      - handle: video_file
+        from_flow:
+          - input_handle: video_path
+      - handle: subtitle_file
+        from_node:
+          - node_id: binary_save_as_file#1
             output_handle: file_path
-title: translator
+      - handle: subtitle_style
+        value: default
+      - handle: font_name
+        value: Arial
+        from_flow:
+          []
+      - handle: font_size
+        value: 20
+        from_flow:
+          - input_handle: font_size
+      - handle: font_color
+        value: "#FFFFFF"
+        from_flow:
+          - input_handle: font_color
+      - handle: outline_color
+        value: "#000000"
+        from_flow:
+          - input_handle: outline_color
+      - handle: subtitle_position
+        value: bottom
+      - handle: hard_subtitle
+        value: true
+    task: ffmpeg::add-subtitles
+title: Video Translator
+description: "Translates video content by extracting audio, transcribing speech,
+  translating text, and embedding subtitles back into the video"
+inputs_def:
+  - handle: video_path
+    description: Path to the input video file for translation
+    json_schema:
+      type: string
+      ui:widget: file
+    nullable: false
+    executor_name: nodejs
+  - handle: source
+    description: Source language of the video audio content
+    json_schema:
+      enum:
+        - en
+        - cn
+        - ja
+        - fr
+        - ru
+        - de
+      ui:options:
+        labels:
+          - English
+          - 中文
+          - 日本語
+          - Français
+          - Русский
+          - Deutsch
+    value: en
+    nullable: false
+    executor_name: python
+  - handle: target
+    description: Target language for subtitle translation
+    json_schema:
+      enum:
+        - en
+        - cn
+        - ja
+        - fr
+        - ru
+        - de
+      ui:options:
+        labels:
+          - English
+          - 中文
+          - 日本語
+          - Français
+          - Русский
+          - Deutsch
+    value: cn
+    nullable: false
+    executor_name: python
+  - handle: llm
+    description: Language model configuration for translation processing
+    json_schema:
+      ui:options:
+        title: Model
+      ui:widget: llm::model
+    value:
+      model: deepseek-chat
+      temperature: 0.5
+      top_p: 1
+      max_tokens: 128000
+    nullable: false
+    executor_name: python
+  - handle: font_size
+    json_schema:
+      type: number
+      minimum: 12
+      maximum: 72
+    nullable: true
+    description: Font size for subtitle text rendering
+    value: 20
+    executor_name: python
+  - handle: font_color
+    json_schema:
+      type: string
+      ui:widget: color
+      ui:options:
+        colorType: HEX
+    nullable: true
+    description: Font color for subtitle text in HEX format
+    value: "#FFFFFF"
+    executor_name: python
+  - handle: outline_color
+    json_schema:
+      type: string
+      ui:widget: color
+      ui:options:
+        colorType: HEX
+    nullable: true
+    description: Outline color for subtitle text in HEX format
+    value: "#000000"
+    executor_name: python
+outputs_def:
+  - handle: media_file
+    json_schema:
+      type: string
+      ui:widget: file
+    nullable: false
+    description: Translated video file with embedded subtitles
+    executor_name: nodejs
+outputs_from:
+  - handle: media_file
+    from_node:
+      - node_id: add-subtitles#1
+        output_handle: subtitled_video
