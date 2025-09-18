@@ -1,4 +1,4 @@
-version: 0.1.7
+version: 0.1.8
 icon: ./icon.png
 scripts:
   # Script executed when the container is first loaded
@@ -25,7 +25,6 @@ dependencies:
   array: 0.1.2
 name: videos-translator
 releaseNotes: update version
-displayName: Video Translator
-description: Add subtitles to the video in the corresponding language. Recognize
-  the speech of the video, extract
+displayName: "%video-translator%"
+description: "%the-video-translator-is-an-automated-workflow-that-takes-your-vi%"
 repository: https://github.com/oomol-flows/videos-translater

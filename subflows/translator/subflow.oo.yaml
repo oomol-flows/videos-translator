@@ -34,7 +34,7 @@ nodes:
         default_width: 450
       inputs_def:
         - handle: segments
-          description: Input
+          description: Audio transcription segments from speech recognition
           json_schema:
             type: array
             items:
@@ -46,7 +46,7 @@ nodes:
                   type: string
       outputs_def:
         - handle: texts
-          description: Output
+          description: Extracted text strings from transcription segments
           json_schema:
             type: array
             items:
@@ -56,6 +56,7 @@ nodes:
         options:
           entry: scriptlets/+python#2.py
     title: "Convert to texts list"
+    description: "Extracts text content from transcription segments into a list format"
     icon: ":logos:python:"
     node_id: +python#2
     inputs_from:
@@ -70,13 +71,14 @@ nodes:
         default_width: 450
       inputs_def:
         - handle: texts
+          description: Translated text strings to replace original segment texts
           json_schema:
             type: array
             items:
               type: string
           value: ""
         - handle: segments
-          description: Input
+          description: Original transcription segments with timing information
           json_schema:
             type: array
             items:
@@ -130,7 +132,7 @@ nodes:
                         type: number
       outputs_def:
         - handle: segments
-          description: Output
+          description: Updated transcription segments with translated text
           json_schema:
             type: array
             items:
@@ -187,6 +189,8 @@ nodes:
         options:
           entry: scriptlets/+python#1.py
     title: Replace texts of segments
+    description: "Replaces the original text in transcription segments with
+      translated text while preserving timing"
     icon: ":logos:python:"
     node_id: +python#1
     inputs_from:
@@ -317,16 +321,19 @@ nodes:
       - handle: hard_subtitle
         value: true
     task: ffmpeg::add-subtitles
-title: translator
+title: Video Translator
+description: "Translates video content by extracting audio, transcribing speech,
+  translating text, and embedding subtitles back into the video"
 inputs_def:
   - handle: video_path
-    description: Input
+    description: Path to the input video file for translation
     json_schema:
       type: string
       ui:widget: file
     nullable: false
     executor_name: nodejs
   - handle: source
+    description: Source language of the video audio content
     json_schema:
       enum:
         - en
@@ -347,6 +354,7 @@ inputs_def:
     nullable: false
     executor_name: python
   - handle: target
+    description: Target language for subtitle translation
     json_schema:
       enum:
         - en
@@ -367,6 +375,7 @@ inputs_def:
     nullable: false
     executor_name: python
   - handle: llm
+    description: Language model configuration for translation processing
     json_schema:
       ui:options:
         title: Model
@@ -384,7 +393,7 @@ inputs_def:
       minimum: 12
       maximum: 72
     nullable: true
-    description: Font size (used when subtitle_style is custom)
+    description: Font size for subtitle text rendering
     value: 20
     executor_name: python
   - handle: font_color
@@ -394,7 +403,7 @@ inputs_def:
       ui:options:
         colorType: HEX
     nullable: true
-    description: Font color (used when subtitle_style is custom)
+    description: Font color for subtitle text in HEX format
     value: "#FFFFFF"
     executor_name: python
   - handle: outline_color
@@ -404,7 +413,7 @@ inputs_def:
       ui:options:
         colorType: HEX
     nullable: true
-    description: Outline color (used when subtitle_style is custom)
+    description: Outline color for subtitle text in HEX format
     value: "#000000"
     executor_name: python
 outputs_def:
@@ -413,7 +422,7 @@ outputs_def:
       type: string
       ui:widget: file
     nullable: false
-    description: Output
+    description: Translated video file with embedded subtitles
     executor_name: nodejs
 outputs_from:
   - handle: media_file
