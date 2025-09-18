@@ -17,12 +17,12 @@ scripts:
     pip install "ru_core_news_sm @ $hf_endpoint/spacy/ru_core_news_sm/resolve/main/ru_core_news_sm-any-py3-none-any.whl"
     pip install "de_core_news_sm @ $hf_endpoint/spacy/de_core_news_sm/resolve/main/de_core_news_sm-any-py3-none-any.whl"
 dependencies:
-  whisper: 0.0.9
-  oomol-transform: 0.0.4
-  oomol-file: 0.0.13
-  ffmpeg: 0.1.10
-  oomol-preview: 0.0.5
-  array: 0.1.0
+  whisper: 0.0.12
+  oomol-transform: 0.0.7
+  oomol-file: 0.0.20
+  ffmpeg: 0.2.7
+  oomol-preview: 0.1.7
+  array: 0.1.2
 name: videos-translator
 releaseNotes: update version
 displayName: Video Translator

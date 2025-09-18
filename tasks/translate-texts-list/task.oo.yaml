@@ -80,3 +80,4 @@ executor:
     spawn: false
 title: Translate texts list
 icon: ":carbon:list-bulleted:"
+private: true
