@@ -89,14 +89,16 @@
       }
     },
     "extract-audio#1": {
+      "contentWidth": 350,
       "rfNode": {
         "position": {
-          "x": 501,
+          "x": 536,
           "y": 189
         }
       }
     },
     "add-subtitles#1": {
+      "contentWidth": 350,
       "rfNode": {
         "position": {
           "x": 4549,
@@ -117,7 +119,7 @@
     "output": {
       "rfNode": {
         "position": {
-          "x": 5035,
+          "x": 4965,
           "y": 374.25
         }
       }
